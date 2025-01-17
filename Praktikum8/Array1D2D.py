@@ -61,6 +61,13 @@ def TambahAngka(Angka, BanyakData, AngkaBaru):
         os.system('cls')
         print('data sudah penuh')
 
+def HapusAngka(Angka, BanyakData, PosisiHapus):
+    if (BanyakData > 0):
+        if (PosisiHapus >= 1) and (PosisiHapus <= BanyakData):
+            for i in range (PosisiHapus, BanyakData):
+                Angka[i - 1] = Angka[i]
+            Angka[BanyakData] = 0
+
 #subrutin menampilkan elem array angka
 def TampilAngka(Angka, BanyakData):
     for i in range (BanyakData):
@@ -97,6 +104,17 @@ def UbahElemen(A, ElemenBaru, PosisiBaris, PosisiKolom):
         if (PosisiKolom-1 >= 0) and (PosisiKolom-1 <= MaksKolom-1 ):
             A[PosisiBaris-1][PosisiKolom-1] = ElemenBaru
             print(f'Baris {PosisiBaris} Kolom {PosisiKolom} berhasil diubah menjadi {ElemenBaru}')
+
+def HapusElemen(A, PosisiBaris, PosisiKolom):
+    if (PosisiBaris >= 1) and (PosisiBaris <= MaksBaris):
+        if (PosisiKolom >= 1) and (PosisiKolom <= MaksKolom):
+            ElemenHapus = A[PosisiBaris - 1][PosisiKolom - 1]  # Sesuaikan indeks ke 0-based
+            A[PosisiBaris - 1][PosisiKolom - 1] = 0  # Set elemen menjadi 0
+            print(f'Elemen yang dihapus: {ElemenHapus}')
+        else:
+            print('Posisi kolom tidak sesuai')
+    else:
+        print('Posisi baris tidak sesuai')
         
 #subrutin menampilkan elem array matriks A
 def TampilMatriks(A):
@@ -128,7 +146,7 @@ while (Pilih != 0):
                         print('2. Penambahan array angka')
                         AngkaBaru = int(input('Angka yang ditambahkan :'))
                         TambahAngka(Angka, BanyakData, AngkaBaru)
-                        BanyakData  = BanyakData + 1
+                        BanyakData = BanyakData + 1
                     case 3 :
                         print('3. Penyisipan array angka')
                         PosisiSisip = int(input('Masukkan posisi yang ingin diganti : '))
@@ -136,6 +154,9 @@ while (Pilih != 0):
                         SisipAngka(Angka, BanyakData, PosisiSisip, AngkaBaru)
                     case 4 : 
                         print('4. Penghapusan array angka')
+                        PosisiHapus = int(input('Masukkan posisi array yang ingin di hapus : '))
+                        HapusAngka(Angka, BanyakData, PosisiHapus)
+                        BanyakData = BanyakData - 1
                     case 5 : 
                         print('5. Penyajian array angka')
                         TampilAngka(Angka, BanyakData)
@@ -162,6 +183,9 @@ while (Pilih != 0):
                         UbahElemen(A, ElemenBaru, PosisiBaris, PosisiKolom)
                     case 3 :
                         print('3. Penghapusan elemen matriks A')
+                        PosisiBaris = int(input('Posisi baris : '))
+                        PosisiKolom = int(input('Posisi kolom : '))
+                        HapusElemen(A, PosisiBaris, PosisiKolom)
                     case 4 :
                         print('4. Penyajian elemen matriks A')
                         TampilMatriks(A)
