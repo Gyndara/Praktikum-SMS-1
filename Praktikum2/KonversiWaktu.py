@@ -1,0 +1,2 @@
+
+detik = ('masukan detik : ')
